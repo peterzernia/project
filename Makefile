@@ -14,3 +14,7 @@ clean:
 client:
 	docker-compose run client yarn build
 .PHONY: client
+
+project:
+	docker-compose run project go build
+.PHONY: project
