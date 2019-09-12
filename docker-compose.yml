@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  project:
+    container_name: project
+    build: .
+    command: go run main.go
+    volumes:
+      - .:/go/src/github.com/peterzernia/project
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - client
+    links:
+      - db
+  client:
+    container_name: client
+    build: ./client
+    command: yarn start
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+  db:
+    container_name: postgres
+    hostname: db
+    image: postgres:11
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+volumes:
+  postgres_data:

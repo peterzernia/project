@@ -1,0 +1,6 @@
+# Go
+project
+
+# Javascript/Typescript
+/client/node_modules
+/client/build
