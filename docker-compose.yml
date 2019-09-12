@@ -11,7 +11,6 @@ services:
       - "8001:8001"
     depends_on:
       - db
-      - client
     links:
       - db
   client:
@@ -24,6 +23,7 @@ services:
       - "3000:3000"
     volumes:
       - ./client:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
   db:
     container_name: postgres
     hostname: db
@@ -33,4 +33,5 @@ services:
     ports:
       - "5432:5432"
 volumes:
+  node_modules:
   postgres_data:
