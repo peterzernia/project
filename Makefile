@@ -1,6 +1,6 @@
 dc := docker-compose
 ifeq ($(CI), true)
-	dc := docker-compose -f docker-compose-prod.yml
+	dc := docker-compose -f docker-compose-ci.yml
 endif
 
 build:

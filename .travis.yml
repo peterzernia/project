@@ -1,0 +1,9 @@
+matrix:
+  include:
+    - stage: Unit tests
+      language: ruby
+      services:
+        - docker
+      install:
+        - make build
+      script: make test
