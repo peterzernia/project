@@ -4,7 +4,7 @@ ifeq ($(CI), true)
 endif
 
 build:
-	$(dc) build --no-cache
+	$(dc) build
 .PHONY: build
 
 up:
