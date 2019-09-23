@@ -17,8 +17,7 @@ services:
     container_name: client
     build: ./client
     command: yarn start
-    environment:
-      NODE_ENV: development
+    env_file: .env
     ports:
       - "3000:3000"
     volumes:

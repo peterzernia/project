@@ -4,3 +4,6 @@ project
 # Javascript/Typescript
 /client/node_modules
 /client/build
+
+# misc
+.env

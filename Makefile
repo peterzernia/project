@@ -1,20 +1,41 @@
+dc := docker-compose
+ifeq ($(CI), true)
+	dc := docker-compose -f docker-compose-prod.yml
+endif
+
 build:
-	docker-compose build
+	$(dc) build --no-cache
 .PHONY: build
 
 up:
-	docker-compose up
+	$(dc) up
 .PHONY: up
 
-clean:
-	docker-compose stop
-	docker-compose rm -fv
-.PHONY: clean
+lint:
+	$(dc) run --rm project go vet
+	$(dc) run --rm client yarn lint
+.PHONY: lint
+
+test-go:
+	$(dc) run --rm project go test
+.PHONY: test-go
+
+test-js:
+	$(dc) run --rm client yarn test
+.PHONY: test-js
+
+test: test-go test-js
+.PHONY: test
 
 client:
-	docker-compose run client yarn build
+	$(dc) run --rm client yarn build
 .PHONY: client
 
 project:
-	docker-compose run project go build
+	$(dc) run --rm project go build
 .PHONY: project
+
+clean:
+	$(dc) stop
+	$(dc) rm -fv
+.PHONY: clean

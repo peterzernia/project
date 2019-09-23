@@ -5,10 +5,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No test specified\" && exit 0",
     "start": "webpack-dev-server --mode development --hot --inline --port 3000 --history-api-fallback --host 0.0.0.0",
     "build": "webpack --mode=production",
-    "lint": "./node_modules/.bin/eslint './**/*.{ts,tsx, js}'"
+    "lint": "./node_modules/.bin/eslint --fix './**/*.{ts,tsx,js}'"
   },
   "dependencies": {
     "@types/react": "^16.9.2",
