@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/peterzernia/project/auth"
@@ -31,5 +33,6 @@ func main() {
 		c.File("./client/build/index.html")
 	})
 
-	router.Run(":80")
+	port := ":" + os.Getenv("PORT")
+	router.Run(port)
 }

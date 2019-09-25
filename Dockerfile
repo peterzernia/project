@@ -9,8 +9,4 @@ RUN go mod download
 
 COPY . /go/src/github.com/peterzernia/project
 
-RUN go build
-
-EXPOSE 80
-
-CMD ["./project"]
+EXPOSE 8001
