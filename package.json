@@ -1,0 +1,12 @@
+{
+    "scripts": {
+        "heroku-prebuild": "cd client && yarn install"
+    },
+    "engines": {
+        "node": "12.9.1",
+        "npm": "6.10.3"
+    },
+    "cacheDirectories": [
+        "client/node_modules"
+    ]
+}
