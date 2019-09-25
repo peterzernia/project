@@ -1,14 +1,14 @@
 matrix:
   include:
-  - stage: Unit test
-    language: ruby
-    services:
-    - docker
-    install:
-    - touch .env
-    - make build
-    script: make test
-  - stage: Deploy
+    - stage: Unit test
+      language: ruby
+      services:
+      - docker
+      install:
+      - touch .env
+      - make build
+      script: make test
+    - stage: Deploy
       script: skip
       deploy: &heroku
         provider: heroku
