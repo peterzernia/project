@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "heroku-prebuild": "cd client/ && yarn install"
+        "heroku-prebuild": "cd client/ && yarn install && yarn build"
     },
     "engines": {
         "node": "12.9.1",
