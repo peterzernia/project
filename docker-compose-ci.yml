@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   project:
-    container_name: project
     build: .
     command: go build
     env_file: .env
@@ -11,7 +10,6 @@ services:
     volumes:
       - .:/go/src/github.com/peterzernia/project
   client:
-    container_name: client
     build: ./client
     command: yarn build
     env_file: .env

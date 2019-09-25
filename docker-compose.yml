@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   project:
-    container_name: project
     build: .
     command: go run main.go
     env_file: .env
@@ -17,7 +16,6 @@ services:
     links:
       - db
   client:
-    container_name: client
     build: ./client
     command: yarn start
     env_file: .env
@@ -27,7 +25,6 @@ services:
       - ./client:/usr/src/app
       - node_modules:/usr/src/app/node_modules
   db:
-    container_name: postgres
     hostname: db
     image: postgres:11
     volumes:
