@@ -1,10 +1,17 @@
 matrix:
   include:
-    - stage: Unit tests
-      language: ruby
-      services:
-        - docker
-      install:
-        - touch .env
-        - make build
-      script: make test
+  - stage: Unit test
+    language: ruby
+    services:
+    - docker
+    install:
+    - touch .env
+    - make build
+    script: make test
+  - stage: Deploy
+      script: skip
+      deploy: &heroku
+        provider: heroku
+        api_key:
+          secure: IhJoQdVLAbisPrWbIUAHzqhhJyiEAJdgFK0yBfsfvClqRrXtfzQMLxMKtq1pqa+sqyHLOw+4giFQtZKtDTQ8qStONF+bo5HmXoIESmIy5/N4+7gAN8sCKj/uUPxxfKCczfMpYfzFhFqnVk0hWcgixj6YDDZRtUNabQhg6EE4fK4pAaeMIhHZmVI1uS9td+QmuJeLx62sAITb8j6JimsbMXkvdTNKbavzN4k85eX3TeWO+B7UC71sk86lesPm0DzJ5dp+qPZRZ+4hxQvIjE4d3po3zo6fTqlguDvDA/hxUGsv6hdCkrv2tEyMHCoCTBNFoxZomXavoaWo0YkChlmi5ff6NT5RSnA2x2dqwrHnQfnuVEu+jvkwbTcXYC5N4ZGoSpdkgoFCyukEdEv2nCs9lJ6asDcayxte2N37y3MEElQotsdBHS4mt44LcaCpyOF72zeiMKN/qEewtk6DrdSe5TWPNevoowJ7dm918ziMEPnATKiHu3k1EqvCaUyIIEf3EXKVYuMRCua7X1orjRD1Bn+yt+TwLww5dPtjezIj2o4nHZMrQkNncLDbbP9cxTnWuuWwMO1EqE2Q372TJqiubEs3gYEMNKpUvjUDUS2xZlRX9I/zJeFhyS40dR70mgCvJp6iP5Hc0Enu/3kqPaY/e8FfZlQf0nwDmu8EodAGlnU=
+        app: project-boilerplate
