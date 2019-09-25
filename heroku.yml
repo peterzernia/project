@@ -1,0 +1,13 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: db
+  config:
+    CI: true
+build:
+  docker:
+    project: Dockerfile
+    client: client/Dockerfile
+run:
+  project: go build && ./build
+  client: yarn build
