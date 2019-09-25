@@ -1,8 +1,0 @@
-setup:
-  addons:
-    - plan: heroku-postgresql
-      as: db
-build:
-  docker:
-    project: Dockerfile
-    client: client/Dockerfile
