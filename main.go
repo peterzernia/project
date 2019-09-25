@@ -31,5 +31,5 @@ func main() {
 		c.File("./client/build/index.html")
 	})
 
-	router.Run(":8001")
+	router.Run(":80")
 }

@@ -11,6 +11,6 @@ COPY . /go/src/github.com/peterzernia/project
 
 RUN go build
 
-EXPOSE 8001
+EXPOSE 80
 
 CMD ["./project"]

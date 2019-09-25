@@ -6,6 +6,3 @@ build:
   docker:
     project: Dockerfile
     client: client/Dockerfile
-run:
-  project: go build && ./build
-  client: yarn build
