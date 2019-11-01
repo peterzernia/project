@@ -8,6 +8,14 @@ import (
 	"github.com/peterzernia/project/utils"
 )
 
+func handleOptions(c *gin.Context) {
+	c.Header("Allow", "POST, PUT, GET, OPTIONS")
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Headers", "origin, content-type, accept")
+	c.Header("Content-Type", "application/json")
+	c.Status(http.StatusOK)
+}
+
 func handleRegistration(c *gin.Context) {
 	var auth models.Auth
 	c.ShouldBindJSON(&auth)
@@ -209,14 +217,16 @@ func handleGetUser(c *gin.Context) {
 	db := utils.GetDB()
 
 	token := c.GetHeader("Authorization")
-	if token == "" {
+
+	err := db.Where("token = ?", token).First(&user).Error
+
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Invalid credentials",
+			"message": "Invailid credentials",
 		})
 		return
 	}
 
-	db.Where("token = ?", token).First(&user)
 	c.JSON(http.StatusOK, gin.H{
 		"id":         user.ID,
 		"created_at": user.CreatedAt,

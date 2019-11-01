@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -21,13 +22,16 @@ func main() {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:8001"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "OPTIONS"},
-		AllowHeaders:     []string{"Origin"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
 
-	api := "/api/v1"
-	auth.InitializeRoutes(router.Group(api + "/auth"))
+	api := router.Group("/api/v1")
+	auth.InitializeRoutes(api.Group("/auth"))
+	api.GET("/health", func(c *gin.Context) {
+		c.Status(http.StatusOK)
+	})
 
 	// Catch all routes for React-Router
 	router.Use(static.Serve("/", static.LocalFile("./client/build", true)))
