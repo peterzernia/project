@@ -17,7 +17,7 @@ function request(
     opts.body = JSON.stringify(payload);
   }
 
-  return fetch(`http://localhost:8001${endpoint}`, opts)
+  return fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, opts)
     .then(res => {
       if (res.status >= 400) {
         res.json().then(json => {

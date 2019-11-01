@@ -5,6 +5,7 @@ matrix:
       services:
         - docker
       install:
+        - cd client && touch .env && echo "REACT_APP_API_URL=https://project-boilerplate.herokuapp.com" >> .env && cd ..
         - touch .env
         - make build
       script: make test
