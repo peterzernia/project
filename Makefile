@@ -35,6 +35,10 @@ project:
 	$(dc) run --rm project go build
 .PHONY: project
 
+sql:
+	docker exec -it project_db_1 psql -U postgres
+.PHONY: sql
+
 clean:
 	$(dc) stop
 	$(dc) rm -fv

@@ -3,7 +3,7 @@ version: "3.3"
 services:
   project:
     build: .
-    command: go run main.go
+    command: gin -i -a $PORT run main.go
     env_file: .env
     environment:
       CGO_ENABLED: 0

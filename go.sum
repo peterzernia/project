@@ -31,6 +31,8 @@ github.com/gin-contrib/cors v1.3.0 h1:PolezCc89peu+NgkIWt9OB01Kbzt6IP0J/JvkG6xxl
 github.com/gin-contrib/cors v1.3.0/go.mod h1:artPvLlhkF7oG06nK8v3U8TNz6IeX+w1uzCSEId5/Vc=
 github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3 h1:t8FVkw33L+wilf2QiWkw0UV77qRpcH/JHPKGpKa2E8g=
 github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3/go.mod h1:VJ0WA2NBN22VlZ2dKZQPAPnyWw5XTlK1KymzLKsr59s=
+github.com/gin-gonic/contrib v0.0.0-20190923054218-35076c1b2bea h1:tPQfr1S0mubDv/jvdbS1xbKOJzDgvIHi7db/MYr4EKg=
+github.com/gin-gonic/contrib v0.0.0-20190923054218-35076c1b2bea/go.mod h1:iqneQ2Df3omzIVTkIfn7c1acsVnMGiSLn4XF5Blh3Yg=
 github.com/gin-gonic/gin v1.4.0 h1:3tMoCCfM7ppqsR0ptz/wi1impNpT7/9wQtMZ8lr1mCQ=
 github.com/gin-gonic/gin v1.4.0/go.mod h1:OW2EZn3DO8Ln9oIKOvM++LBO+5UPHJJDH72/q/3rZdM=
 github.com/go-kit/kit v0.8.0/go.mod h1:xBxKIO96dXMWWy0MnWVtmwkA9/13aqxPnvrjFYMA2as=
@@ -87,6 +89,7 @@ github.com/mattn/go-shellwords v1.0.6 h1:9Jok5pILi5S1MnDirGVTufYGtksUs/V2BWUP3Zk
 github.com/mattn/go-shellwords v1.0.6/go.mod h1:3xCvwCdWdlDJUrvuMn7Wuy9eWs4pE8vqg+NOMyg4B2o=
 github.com/mattn/go-sqlite3 v1.10.0 h1:jbhqpg7tQe4SupckyijYiy0mJJ/pRyHvXf7JdWK860o=
 github.com/mattn/go-sqlite3 v1.10.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
+github.com/mattn/go-sqlite3 v1.11.0 h1:LDdKkqtYlom37fkvqs8rMPFKAMe8+SgjbwZ6ex1/A/Q=
 github.com/mattn/go-sqlite3 v1.11.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
