@@ -11,7 +11,9 @@ matrix:
     - stage: deploy
       if: branch = master
       script:
-        - cd client && touch .env && echo "REACT_APP_API_URL=https://project-boilerplate.herokuapp.com" >> .env && cd ..
+        - cd client
+        - touch .env && echo "REACT_APP_API_URL=https://project-boilerplate.herokuapp.com" >> .env
+        - cd ..
       deploy: &heroku
         provider: heroku
         api_key:
