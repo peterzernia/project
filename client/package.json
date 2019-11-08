@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "test": "./node_modules/.bin/jest --coverage",
-    "start": "webpack-dev-server --mode development --hot --inline --port 3000 --history-api-fallback --host 0.0.0.0",
-    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --mode development --hot --inline --port 3000 --history-api-fallback --host 0.0.0.0 --env.REACT_APP_API_URL=$REACT_APP_API_URL",
+    "build": "webpack --mode=production --env.REACT_APP_API_URL=$REACT_APP_API_URL",
     "lint": "./node_modules/.bin/eslint --fix './**/*.{ts,tsx,js}'"
   },
   "dependencies": {
@@ -41,7 +41,6 @@
     "typescript": "^3.6.3",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-dotenv-plugin": "^2.1.0"
+    "webpack-dev-server": "^3.8.0"
   }
 }
