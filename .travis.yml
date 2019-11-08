@@ -10,6 +10,7 @@ matrix:
       script: make test
     - stage: deploy
       if: branch = master
+      script: skip
       deploy: &heroku
         provider: heroku
         api_key:
