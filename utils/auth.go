@@ -33,6 +33,8 @@ func ValidatePassword(pwd string) error {
 	return nil
 }
 
+// ParseUserDBError parses the error returned from Postgres
+// when a unique kep exists
 func ParseUserDBError(err error) string {
 	var message string
 

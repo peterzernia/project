@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jinzhu/gorm"
 
@@ -14,9 +15,7 @@ var DB *gorm.DB
 
 // InitDB ...
 func InitDB() *gorm.DB {
-	connection := fmt.Sprintf("host=db sslmode=disable user=postgres password=postgres")
-
-	db, err := gorm.Open("postgres", connection)
+	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Println(err)
 	}
