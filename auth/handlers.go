@@ -18,23 +18,14 @@ func handleOptions(c *gin.Context) {
 
 func handleRegistration(c *gin.Context) {
 	var auth models.Auth
-	c.ShouldBindJSON(&auth)
+	if err := c.BindJSON(&auth); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Validation Error",
+		})
+		return
+	}
+
 	db := utils.GetDB()
-
-	if auth.Password1 != auth.Password2 {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Passwords do not match",
-		})
-		return
-	}
-
-	err := utils.ValidatePassword(auth.Password1)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": err.Error(),
-		})
-		return
-	}
 
 	password := utils.HashAndSalt([]byte(auth.Password1))
 	token, _ := utils.GenerateRandomString(32)
@@ -55,20 +46,19 @@ func handleRegistration(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"id":         user.ID,
-		"created_at": user.CreatedAt,
-		"updated_at": user.UpdatedAt,
-		"email":      user.Email,
-		"token":      user.Token,
-		"username":   user.Username,
-	})
+	c.JSON(http.StatusOK, user)
 }
 
 func handleLogin(c *gin.Context) {
 	var auth models.Auth
 	var user models.User
-	c.ShouldBindJSON(&auth)
+	if err := c.BindJSON(&auth); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
 	db := utils.GetDB()
 
 	db.Where("username = ?", auth.Username).First(&user)
@@ -88,14 +78,7 @@ func handleLogin(c *gin.Context) {
 		db.Save(&user)
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"id":         user.ID,
-		"created_at": user.CreatedAt,
-		"updated_at": user.UpdatedAt,
-		"email":      user.Email,
-		"token":      user.Token,
-		"username":   user.Username,
-	})
+	c.JSON(http.StatusOK, user)
 }
 
 func handleLogout(c *gin.Context) {
@@ -110,15 +93,19 @@ func handleLogout(c *gin.Context) {
 		return
 	}
 
-	db.Where("token = ?", token).First(&user)
-
-	if user.Username == "" {
-		c.Status(http.StatusBadRequest)
+	if err := db.Where("token = ?", token).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invailid credentials",
+		})
 		return
 	}
 
 	user.Token = ""
-	db.Save(&user)
+	if err := db.Save(&user).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
 	c.Status(http.StatusOK)
 	return
 }
@@ -126,7 +113,13 @@ func handleLogout(c *gin.Context) {
 func handlePasswordChange(c *gin.Context) {
 	var auth models.Auth
 	var user models.User
-	c.ShouldBindJSON(&auth)
+	if err := c.BindJSON(&auth); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Validation Error",
+		})
+		return
+	}
+
 	db := utils.GetDB()
 
 	token := c.GetHeader("Authorization")
@@ -137,28 +130,16 @@ func handlePasswordChange(c *gin.Context) {
 		return
 	}
 
-	db.Where("token = ?", token).First(&user)
+	if err := db.Where("token = ?", token).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invailid credentials",
+		})
+		return
+	}
 
-	err := utils.ComparePasswords(user.Password, auth.Password)
-
-	if err != nil {
+	if err := utils.ComparePasswords(user.Password, auth.Password); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid credentials",
-		})
-		return
-	}
-
-	if auth.Password1 != auth.Password2 {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Passwords do not match",
-		})
-		return
-	}
-
-	err = utils.ValidatePassword(auth.Password1)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": err.Error(),
 		})
 		return
 	}
@@ -173,18 +154,22 @@ func handlePasswordChange(c *gin.Context) {
 func handleUpdateUser(c *gin.Context) {
 	var auth models.Auth
 	var user models.User
-	c.ShouldBindJSON(&auth)
-	db := utils.GetDB()
-
-	token := c.GetHeader("Authorization")
-	if token == "" {
+	if err := c.BindJSON(&auth); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Invalid credentials",
+			"message": "Validation Error",
 		})
 		return
 	}
+	db := utils.GetDB()
 
-	db.Where("token = ?", token).First(&user)
+	token := c.GetHeader("Authorization")
+
+	if err := db.Where("token = ?", token).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invailid credentials",
+		})
+		return
+	}
 
 	if auth.Username != "" {
 		user.Username = auth.Username
@@ -202,14 +187,7 @@ func handleUpdateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"id":         user.ID,
-		"created_at": user.CreatedAt,
-		"updated_at": user.UpdatedAt,
-		"email":      user.Email,
-		"token":      user.Token,
-		"username":   user.Username,
-	})
+	c.JSON(http.StatusOK, user)
 }
 
 func handleGetUser(c *gin.Context) {
@@ -218,21 +196,12 @@ func handleGetUser(c *gin.Context) {
 
 	token := c.GetHeader("Authorization")
 
-	err := db.Where("token = ?", token).First(&user).Error
-
-	if err != nil {
+	if err := db.Where("token = ?", token).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invailid credentials",
 		})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"id":         user.ID,
-		"created_at": user.CreatedAt,
-		"updated_at": user.UpdatedAt,
-		"email":      user.Email,
-		"token":      user.Token,
-		"username":   user.Username,
-	})
+	c.JSON(http.StatusOK, user)
 }

@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"errors"
 	"log"
 	"strings"
 
@@ -23,14 +22,6 @@ func ComparePasswords(hashedPwd string, plainPwd string) error {
 	bytePlain := []byte(plainPwd)
 	err := bcrypt.CompareHashAndPassword(byteHash, bytePlain)
 	return err
-}
-
-// ValidatePassword validates password
-func ValidatePassword(pwd string) error {
-	if len(pwd) < 6 {
-		return errors.New("Password must be at least 6 characters")
-	}
-	return nil
 }
 
 // ParseUserDBError parses the error returned from Postgres
