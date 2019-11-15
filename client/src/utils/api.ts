@@ -1,8 +1,18 @@
-import { post } from './requests'
+import { post } from "./requests";
 
 interface Login {
   username: string;
   password: string;
 }
 
-export const login = (credentials: Login) => post('/api/v1/auth/login', credentials)
+interface Register {
+  username: string;
+  email: string;
+  password1: string;
+  password2: string;
+}
+
+export const login = (credentials: Login) =>
+  post("/api/v1/auth/login", credentials);
+export const register = (credentials: Register) =>
+  post("/api/v1/auth/register", credentials);

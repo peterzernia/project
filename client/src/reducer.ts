@@ -1,4 +1,4 @@
-import { SET_USER, RESET } from "./actions";
+import { SET_USER, CLEAR_USER, RESET } from './actions'
 
 interface Action {
   type: string;
@@ -7,21 +7,25 @@ interface Action {
 
 interface State {
   user: object;
+  authenticated: boolean;
 }
 
 export const initialState = {
-  user: {}
-};
+  user: {},
+  authenticated: false,
+}
 
-export const init = () => initialState;
+export const init = () => initialState
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, authenticated: true }
+    case CLEAR_USER:
+      return { ...state, user: initialState.user, authenticated: false }
     case RESET:
-      return init();
+      return init()
     default:
-      throw new Error();
+      throw new Error()
   }
-};
+}
