@@ -8,37 +8,36 @@ interface Props {
 }
 
 export default function Form(props: Props) {
-    const [values, setValues] = React.useState({})
+  const [values, setValues] = React.useState({})
+  const { children } = props
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValues = values
-        newValues[e.target.name] = e.target.value
-        setValues(newValues)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValues = values
+    newValues[e.target.name] = e.target.value
+    setValues(newValues)
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    if (e.target.form.checkValidity()) {
+      props.handleSubmit(values)
     }
+  }
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
+  // Assign handleChange func and values to children inputs
+  const inputs = children.map((child) => React.cloneElement(child, {
+    handleChange,
+    value: values[child.props.name],
+    key: child.props.name,
+  }))
 
-        if (e.target.form.checkValidity()) {
-            props.handleSubmit(values)
-        }
-    }
-
-    // Assign handleChange func and values to children inputs
-    const inputs = props.children.map((child, i) => {
-        return React.cloneElement(child, { 
-            handleChange: handleChange,
-            value: values[child.props.name],
-            key: i
-        })
-    })
-
-    return (
-        <form>
-            {inputs}
-            <button type="submit" onClick={handleSubmit}>
-                Submit
-            </button>
-        </form>
-    )
+  return (
+    <form>
+      {inputs}
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
+    </form>
+  )
 }

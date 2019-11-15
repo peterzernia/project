@@ -14,28 +14,28 @@ interface Props {
 }
 
 export default function Input(props: Props) {
-    const {
-        className,
-        handleChange,
-        label,
-        name,
-        placeholder,
-        required,
-        type,
-        value,
-    } = props
+  const {
+    className,
+    handleChange,
+    label,
+    name,
+    placeholder,
+    required,
+    type,
+    value,
+  } = props
 
-    return (
-        <div className={className}>
-            <label htmlFor={className}>{label}</label>
-            <input 
-                name={name}
-                onChange={handleChange}
-                placeholder={placeholder}
-                required={required}
-                type={type}
-                value={value}
-            />
-        </div>
-    )
+  return (
+    <div className={className}>
+      <label htmlFor={className}>{label}</label>
+      <input
+        name={name}
+        onChange={handleChange}
+        placeholder={placeholder}
+        required={required}
+        type={type}
+        value={value}
+      />
+    </div>
+  )
 }
