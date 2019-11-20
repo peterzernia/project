@@ -7,17 +7,17 @@ interface Props {
     handleSubmit: handleSubmit;
 }
 
-export default function Form(props: Props) {
+export default function Form(props: Props): React.ReactElement {
   const [values, setValues] = React.useState({})
   const { children } = props
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValues = values
     newValues[e.target.name] = e.target.value
     setValues(newValues)
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: any): void => {
     e.preventDefault()
 
     if (e.target.form.checkValidity()) {

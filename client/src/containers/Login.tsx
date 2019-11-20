@@ -1,23 +1,23 @@
 import * as React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { login } from '../utils/api'
 import Form from '../components/Form'
 import Input from '../components/Input'
 import { SET_USER } from '../actions'
 import { StateContext, DispatchContext } from '../context'
-import { RouteComponentProps } from 'react-router-dom'
+
 
 interface Payload {
   username: string;
   password: string;
 }
 
-export default function Login(props: RouteComponentProps) {
+export default function Login(props: RouteComponentProps): React.ReactElement {
   const { history } = props
   const state = React.useContext(StateContext)
   const dispatch = React.useContext(DispatchContext)
 
-  const handleSubmit = (payload: Payload) => {
+  const handleSubmit = (payload: Payload): void => {
     login(payload).then((res) => {
       dispatch({
         type: SET_USER,

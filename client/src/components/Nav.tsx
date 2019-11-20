@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { StateContext } from '../context'
 
 
-export default function Nav() {
+export default function Nav(): React.ReactElement {
   const state = React.useContext(StateContext)
 
   return (

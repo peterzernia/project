@@ -13,7 +13,7 @@ interface Props {
     value?: any;
 }
 
-export default function Input(props: Props) {
+export default function Input(props: Props): React.ReactElement {
   const {
     className,
     handleChange,

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { register } from '../utils/api'
 import Form from '../components/Form'
 import Input from '../components/Input'
 import { SET_USER } from '../actions'
 import { StateContext, DispatchContext } from '../context'
-import { RouteComponentProps } from 'react-router-dom'
+
 
 interface Payload {
   username: string;
@@ -14,12 +14,12 @@ interface Payload {
   password2: string;
 }
 
-export default function Register(props: RouteComponentProps) {
+export default function Register(props: RouteComponentProps): React.ReactElement {
   const { history } = props
   const state = React.useContext(StateContext)
   const dispatch = React.useContext(DispatchContext)
 
-  const handleSubmit = (payload: Payload) => {
+  const handleSubmit = (payload: Payload): void => {
     register(payload).then((res) => {
       dispatch({
         type: SET_USER,
@@ -44,7 +44,7 @@ export default function Register(props: RouteComponentProps) {
         name="email"
         type="text"
         required
-        />
+      />
       <Input
         label="Password"
         name="password1"
@@ -56,7 +56,7 @@ export default function Register(props: RouteComponentProps) {
         name="password2"
         type="password"
         required
-        />
+      />
     </Form>
   )
 }

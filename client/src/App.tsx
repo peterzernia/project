@@ -8,7 +8,7 @@ import Login from './containers/Login'
 import Logout from './containers/Logout'
 import Register from './containers/Register'
 
-export default function App() {
+export default function App(): React.ReactElement {
   const [state, dispatch] = React.useReducer(reducer, initialState, init)
 
   return (

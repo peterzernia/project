@@ -15,7 +15,7 @@ export const initialState = {
   authenticated: false,
 }
 
-export const init = () => initialState
+export const init = (): State => initialState
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
