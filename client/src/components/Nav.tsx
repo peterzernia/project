@@ -14,10 +14,10 @@ export default function Nav() {
         </li>
         <li>
           {
-          state.authenticated
-            ? <Link to="/logout">Logout</Link>
-            : <Link to="/login">Login</Link>
-        }
+            state.authenticated
+              ? <Link to="/logout">Logout</Link>
+              : <Link to="/login">Login</Link>
+          }
         </li>
       </ul>
     </nav>

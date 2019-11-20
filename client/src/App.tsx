@@ -6,6 +6,7 @@ import Nav from './components/Nav'
 import Home from './containers/Home'
 import Login from './containers/Login'
 import Logout from './containers/Logout'
+import Register from './containers/Register'
 
 export default function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState, init)
@@ -18,6 +19,7 @@ export default function App() {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
+          <Route path="/register" component={Register} />
         </Router>
       </StateContext.Provider>
     </DispatchContext.Provider>
