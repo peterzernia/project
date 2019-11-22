@@ -3,7 +3,7 @@ import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { register } from '../utils/api'
 import Form from '../components/Form'
 import Input from '../components/Input'
-import { SET_USER } from '../actions'
+import { SET_USER, SET_NOTIFICATION } from '../actions'
 import { StateContext, DispatchContext } from '../context'
 
 
@@ -20,14 +20,24 @@ export default function Register(props: RouteComponentProps): React.ReactElement
   const dispatch = React.useContext(DispatchContext)
 
   const handleSubmit = async (payload: Payload): Promise<void> => {
-    const res = await register(payload)
+    try {
+      const res = await register(payload)
 
-    dispatch({
-      type: SET_USER,
-      payload: res,
-    })
+      dispatch({
+        type: SET_USER,
+        payload: res,
+      })
 
-    history.push('/')
+      history.push('/')
+    } catch (err) {
+      dispatch({
+        type: SET_NOTIFICATION,
+        payload: {
+          message: err.message,
+          type: 'error',
+        },
+      })
+    }
   }
 
   if (state.authenticated) return <Redirect to="/" />

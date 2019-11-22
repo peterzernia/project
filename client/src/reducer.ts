@@ -1,4 +1,10 @@
-import { SET_USER, CLEAR_USER, RESET } from './actions'
+import {
+  SET_USER,
+  CLEAR_USER,
+  SET_NOTIFICATION,
+  CLEAR_NOTIFICATION,
+  RESET,
+} from './actions'
 
 interface Action {
   type: string;
@@ -8,11 +14,13 @@ interface Action {
 interface State {
   user: object;
   authenticated: boolean;
+  notification: object;
 }
 
 export const initialState = {
   user: {},
   authenticated: false,
+  notification: {},
 }
 
 export const reducer = (state: State, action: Action): State => {
@@ -23,6 +31,10 @@ export const reducer = (state: State, action: Action): State => {
     case CLEAR_USER:
       localStorage.removeItem('user')
       return { ...state, user: initialState.user, authenticated: false }
+    case SET_NOTIFICATION:
+      return { ...state, notification: action.payload }
+    case CLEAR_NOTIFICATION:
+      return { ...state, notification: initialState.notification }
     case RESET:
       return initialState
     default:

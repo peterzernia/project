@@ -3,9 +3,8 @@ import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { login } from '../utils/api'
 import Form from '../components/Form'
 import Input from '../components/Input'
-import { SET_USER } from '../actions'
+import { SET_USER, SET_NOTIFICATION } from '../actions'
 import { StateContext, DispatchContext } from '../context'
-
 
 interface Payload {
   username: string;
@@ -18,14 +17,24 @@ export default function Login(props: RouteComponentProps): React.ReactElement {
   const dispatch = React.useContext(DispatchContext)
 
   const handleSubmit = async (payload: Payload): Promise<void> => {
-    const res = await login(payload)
+    try {
+      const res = await login(payload)
 
-    dispatch({
-      type: SET_USER,
-      payload: res,
-    })
+      dispatch({
+        type: SET_USER,
+        payload: res,
+      })
 
-    history.push('/')
+      history.push('/')
+    } catch (err) {
+      dispatch({
+        type: SET_NOTIFICATION,
+        payload: {
+          type: 'error',
+          message: err.message,
+        },
+      })
+    }
   }
 
   if (state.authenticated) return <Redirect to="/" />
