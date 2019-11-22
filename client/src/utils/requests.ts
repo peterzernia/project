@@ -1,4 +1,4 @@
-const request = (
+const request = async (
   method: string,
   endpoint: string,
   payload: object,
@@ -17,20 +17,19 @@ const request = (
     opts.body = JSON.stringify(payload)
   }
 
-  return fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, opts)
-    .then((res) => {
-      if (res.status >= 400) {
-        res.json().then((json) => {
-          Promise.reject(json)
-        })
-      }
+  try {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, opts)
 
-      if (!res) return null
-      return res.json().then((json) => (res.ok ? json : Promise.reject(json)))
-    })
-    .catch((err) => {
-      throw new Error(err.message)
-    })
+    if (res.status >= 400) {
+      const json = await res.json()
+      return Promise.reject(json)
+    }
+
+    const json = await res.json()
+    return res.ok ? Promise.resolve(json) : Promise.reject(json)
+  } catch (err) {
+    throw new Error(err.message)
+  }
 }
 
 export const get = (endpoint: string, authorization: string = null): Promise<{}> => request('GET', endpoint, null, authorization)

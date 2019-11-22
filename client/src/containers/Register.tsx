@@ -19,14 +19,15 @@ export default function Register(props: RouteComponentProps): React.ReactElement
   const state = React.useContext(StateContext)
   const dispatch = React.useContext(DispatchContext)
 
-  const handleSubmit = (payload: Payload): void => {
-    register(payload).then((res) => {
-      dispatch({
-        type: SET_USER,
-        payload: res,
-      })
-      history.push('/')
+  const handleSubmit = async (payload: Payload): Promise<void> => {
+    const res = await register(payload)
+
+    dispatch({
+      type: SET_USER,
+      payload: res,
     })
+
+    history.push('/')
   }
 
   if (state.authenticated) return <Redirect to="/" />
