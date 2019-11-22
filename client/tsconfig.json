@@ -9,10 +9,8 @@
     "allowSyntheticDefaultImports": false,
     "jsx": "react",
     "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-      "components/*": ["src/components/*"],
-      "containers/*": ["src/containers/*"]
-    }
-  }
+    "baseUrl": "./"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.tsx"]
 }

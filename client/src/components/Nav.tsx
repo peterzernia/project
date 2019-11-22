@@ -11,6 +11,10 @@ export default function Nav(): React.ReactElement {
       <Link to="/">Home</Link>
       {
         state.authenticated
+          && <Link to="/profile">Profile</Link>
+      }
+      {
+        state.authenticated
           ? <Link to="/logout">Logout</Link>
           : <Link to="/login">Login</Link>
       }

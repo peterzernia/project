@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = (env) => ({
   entry: './src/index.tsx',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
   output: {
     path: path.join(__dirname, '/build'),
@@ -14,8 +14,8 @@ module.exports = (env) => ({
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        test: /\.(ts|tsx)?$/,
+        loader: 'ts-loader',
       },
       {
         test: /\.(js|jsx|ts|tsx)$/,

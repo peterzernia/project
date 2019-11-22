@@ -1,9 +1,9 @@
-function request<T>(
+const request = (
   method: string,
   endpoint: string,
   payload: object,
   authorization: string,
-): Promise<T> {
+): Promise<{}> => {
   const opts = {
     headers: {
       Authorization: authorization,
@@ -33,34 +33,24 @@ function request<T>(
     })
 }
 
-export function get<T>(endpoint: string, authorization: string = null): Promise<T> {
-  return request('GET', endpoint, null, authorization)
-}
+export const get = (endpoint: string, authorization: string = null): Promise<{}> => request('GET', endpoint, null, authorization)
 
-export function patch<T>(
+export const patch = (
   endpoint: string,
   payload: object,
   authorization: string = null,
-): Promise<T> {
-  return request('PATCH', endpoint, payload, authorization)
-}
+): Promise<{}> => request('PATCH', endpoint, payload, authorization)
 
-export function post<T>(
+export const post = (
   endpoint: string,
   payload: object,
   authorization: string = null,
-): Promise<T> {
-  return request('POST', endpoint, payload, authorization)
-}
+): Promise<{}> => request('POST', endpoint, payload, authorization)
 
-export function put<T>(
+export const put = (
   endpoint: string,
   payload: object,
   authorization: string = null,
-): Promise<T> {
-  return request('PUT', endpoint, payload, authorization)
-}
+): Promise<{}> => request('PUT', endpoint, payload, authorization)
 
-export function del<T>(endpoint: string, authorization: string = null): Promise<T> {
-  return request('DELETE', endpoint, null, authorization)
-}
+export const del = (endpoint: string, authorization: string = null): Promise<{}> => request('DELETE', endpoint, null, authorization)
