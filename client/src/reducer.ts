@@ -2,7 +2,7 @@ import { SET_USER, CLEAR_USER, RESET } from './actions'
 
 interface Action {
   type: string;
-  payload: object;
+  payload?: object;
 }
 
 interface State {
@@ -15,16 +15,16 @@ export const initialState = {
   authenticated: false,
 }
 
-export const init = (): State => initialState
-
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case SET_USER:
+      localStorage.setItem('user', JSON.stringify(action.payload))
       return { ...state, user: action.payload, authenticated: true }
     case CLEAR_USER:
+      localStorage.removeItem('user')
       return { ...state, user: initialState.user, authenticated: false }
     case RESET:
-      return init()
+      return initialState
     default:
       throw new Error()
   }

@@ -8,18 +8,12 @@ export default function Nav(): React.ReactElement {
 
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          {
-            state.authenticated
-              ? <Link to="/logout">Logout</Link>
-              : <Link to="/login">Login</Link>
-          }
-        </li>
-      </ul>
+      <Link to="/">Home</Link>
+      {
+        state.authenticated
+          ? <Link to="/logout">Logout</Link>
+          : <Link to="/login">Login</Link>
+      }
     </nav>
   )
 }
