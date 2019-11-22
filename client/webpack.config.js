@@ -14,10 +14,6 @@ module.exports = (env) => ({
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)?$/,
-        loader: 'ts-loader',
-      },
-      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
