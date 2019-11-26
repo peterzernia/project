@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { StateContext, DispatchContext } from './context'
 import { reducer, initialState } from './reducer'
 import { SET_USER } from './actions'
@@ -11,6 +11,7 @@ import Login from './containers/Login'
 import Logout from './containers/Logout'
 import Register from './containers/Register'
 import Profile from './containers/Profile'
+import PageNotFound from './containers/PageNotFound'
 
 import './App.css'
 
@@ -38,11 +39,14 @@ export default function App(): React.ReactElement {
         <Router>
           <Nav />
           <NotificationBanner notification={state.notification} />
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/register" component={Register} />
-          <PrivateRoute path="/profile" component={Profile} authenticated={state.authenticated} />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/register" component={Register} />
+            <PrivateRoute path="/profile" component={Profile} authenticated={state.authenticated} />
+            <Route component={PageNotFound} />
+          </Switch>
         </Router>
       </StateContext.Provider>
     </DispatchContext.Provider>

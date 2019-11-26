@@ -8,14 +8,6 @@ import (
 	"github.com/peterzernia/project/utils"
 )
 
-func handleOptions(c *gin.Context) {
-	c.Header("Allow", "POST, PUT, GET, OPTIONS")
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Headers", "origin, content-type, accept")
-	c.Header("Content-Type", "application/json")
-	c.Status(http.StatusOK)
-}
-
 func handleRegistration(c *gin.Context) {
 	var auth models.Auth
 	if err := c.BindJSON(&auth); err != nil {
