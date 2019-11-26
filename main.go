@@ -19,13 +19,7 @@ func main() {
 
 	router := gin.Default()
 
-	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:8001", "https://project-boilerplate.herokuapp.com/"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-	}))
+	router.Use(cors.Default())
 
 	api := router.Group("/api/v1")
 	auth.InitializeRoutes(api.Group("/auth"))
