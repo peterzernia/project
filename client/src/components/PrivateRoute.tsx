@@ -21,7 +21,7 @@ export default function PrivateRoute(props: Props): React.ReactElement {
         <Component {...routeProps} />
       ) : (
         <Redirect
-          to={{ pathname: '/login' }}
+          to={{ pathname: '/login', state: { from: props.location } }}
         />
       ))}
     />

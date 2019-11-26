@@ -13,6 +13,7 @@ interface Payload {
 
 export default function Login(props: RouteComponentProps): React.ReactElement {
   const { history } = props
+  const { location } = history
   const state = React.useContext(StateContext)
   const dispatch = React.useContext(DispatchContext)
 
@@ -25,7 +26,11 @@ export default function Login(props: RouteComponentProps): React.ReactElement {
         payload: res,
       })
 
-      history.push('/')
+      if (location.state) {
+        history.push(location.state.from.pathname)
+      } else {
+        history.push('/')
+      }
     } catch (err) {
       dispatch({
         type: SET_NOTIFICATION,

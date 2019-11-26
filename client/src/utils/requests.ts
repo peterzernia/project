@@ -5,11 +5,13 @@ const request = async (
   authorization: string,
 ): Promise<{}> => {
   const opts = {
-    headers: {
-      Authorization: authorization,
-    },
+    headers: {},
     body: null,
     method,
+  }
+
+  if (authorization) {
+    opts.headers['Authorization'] = authorization
   }
 
   if (payload) {
