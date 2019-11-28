@@ -7,5 +7,6 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.css$': 'identity-obj-proxy',
+    '^ky$': require.resolve('ky').replace('index.js', 'umd.js'),
   },
 }
