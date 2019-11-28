@@ -1,4 +1,4 @@
-import { post } from './requests'
+import ky from 'ky'
 
 interface Login {
   username: string;
@@ -12,5 +12,7 @@ interface Register {
   password2: string;
 }
 
-export const login = (credentials: Login): Promise<{}> => post('/api/v1/auth/login', credentials)
-export const register = (credentials: Register): Promise<{}> => post('/api/v1/auth/register', credentials)
+const api = ky.create({ prefixUrl: `${process.env.REACT_APP_API_URL}/api/v1/` })
+
+export const login = (credentials: Login): Promise<{}> => api.post('auth/login', { json: credentials }).json()
+export const register = (credentials: Register): Promise<{}> => api.post('auth/register', { json: credentials }).json()
