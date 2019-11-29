@@ -12,7 +12,9 @@ type Props = {
 
 export default function Form(props: Props): React.ReactElement {
   const { children, initialValues, secondaryButton } = props
+
   // Create initial values object with the names of the input
+  // and initial values for each field if they exist
   const [values, setValues] = React.useState(
     children.map((child) => child.props.name).reduce((acc, curr) => {
       acc[curr] = initialValues ? initialValues[curr] : ''
@@ -20,17 +22,15 @@ export default function Form(props: Props): React.ReactElement {
     }, {}),
   )
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValues = { ...values }
-    newValues[e.target.name] = e.target.value
+    newValues[e.target.name] = e.currentTarget.value
     setValues(newValues)
   }
 
-  const handleSubmit = (e: any): void => {
-    e.preventDefault()
-
-    if (e.target.form.checkValidity()) {
+  const handleSubmit = (e: React.MouseEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.form.checkValidity()) {
+      e.preventDefault()
       props.handleSubmit(values)
     }
   }

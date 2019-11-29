@@ -57,7 +57,7 @@ export default function Register(props: RouteComponentProps): React.ReactElement
       <Input
         label="Email"
         name="email"
-        type="text"
+        type="email"
         required
       />
       <Input

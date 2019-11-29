@@ -2,13 +2,11 @@ import * as React from 'react'
 import { DispatchContext } from '../context'
 import { CLEAR_NOTIFICATION } from '../actions'
 
-type Notification = {
-  message?: string;
-  type?: 'error' | 'success';
-}
-
 type Props = {
-  notification: Notification;
+  notification: {
+    message?: string;
+    type?: 'error' | 'success';
+  };
 }
 
 export default function NotificationBanner(props: Props): React.ReactElement {
