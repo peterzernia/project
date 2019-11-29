@@ -1,16 +1,14 @@
 import * as React from 'react'
 
-type handleChange = (e: object) => number;
-
-interface Props {
+type Props = {
     className?: string;
-    handleChange?: handleChange;
+    handleChange?: (e: object) => number;
     label: string;
     name: string;
     placeholder?: string;
     required: boolean;
     type: string;
-    value?: any;
+    value?: string;
 }
 
 export default function Input(props: Props): React.ReactElement {

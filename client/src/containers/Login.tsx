@@ -6,7 +6,7 @@ import Input from '../components/Input'
 import { SET_USER, SET_NOTIFICATION } from '../actions'
 import { StateContext, DispatchContext } from '../context'
 
-interface Payload {
+type Payload = {
   username: string;
   password: string;
 }

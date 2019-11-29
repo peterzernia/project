@@ -7,7 +7,7 @@ import { SET_USER, SET_NOTIFICATION } from '../actions'
 import { StateContext, DispatchContext } from '../context'
 
 
-interface Payload {
+type Payload = {
   username: string;
   email: string;
   password1: string;

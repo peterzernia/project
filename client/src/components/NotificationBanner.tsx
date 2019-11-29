@@ -2,12 +2,12 @@ import * as React from 'react'
 import { DispatchContext } from '../context'
 import { CLEAR_NOTIFICATION } from '../actions'
 
-interface Notification {
+type Notification = {
   message?: string;
   type?: string;
 }
 
-interface Props {
+type Props = {
   notification: Notification;
 }
 

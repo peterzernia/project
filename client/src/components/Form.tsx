@@ -1,18 +1,23 @@
 import * as React from 'react'
 
-type handleSubmit = (values: object) => void;
-
-interface Props {
+type Props = {
     children: Array<React.ReactElement>;
-    handleSubmit: handleSubmit;
+    handleSubmit: (values: object) => void;
 }
 
 export default function Form(props: Props): React.ReactElement {
-  const [values, setValues] = React.useState({})
   const { children } = props
+  // Create initial values object with the names of the input
+  const [values, setValues] = React.useState(
+    children.map((child) => child.props.name).reduce((acc, curr) => {
+      acc[curr] = ''
+      return acc
+    }, {}),
+  )
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const newValues = values
+    const newValues = { ...values }
     newValues[e.target.name] = e.target.value
     setValues(newValues)
   }
