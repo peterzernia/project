@@ -25,7 +25,9 @@ export default function Input(props: Props): React.ReactElement {
 
   return (
     <div className={className}>
-      <label htmlFor={className}>{label}</label>
+      <div>
+        <label htmlFor={className}>{required ? `${label} *` : label}</label>
+      </div>
       <input
         name={name}
         onChange={handleChange}

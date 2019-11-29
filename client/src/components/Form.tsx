@@ -45,20 +45,22 @@ export default function Form(props: Props): React.ReactElement {
   return (
     <form>
       {inputs}
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-      {
-        secondaryButton
-          && (
-            <button
-              type="button"
-              onClick={secondaryButton.handleClick}
-            >
-              {secondaryButton.label}
-            </button>
-          )
-      }
+      <div>
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
+        {
+          secondaryButton
+            && (
+              <button
+                type="button"
+                onClick={secondaryButton.handleClick}
+              >
+                {secondaryButton.label}
+              </button>
+            )
+        }
+      </div>
     </form>
   )
 }
