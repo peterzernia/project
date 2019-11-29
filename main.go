@@ -19,7 +19,11 @@ func main() {
 
 	router := gin.Default()
 
-	router.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AddAllowHeaders("Authorization")
+	config.AllowOrigins = []string{"*"}
+
+	router.Use(cors.New(config))
 
 	api := router.Group("/api/v1")
 	auth.InitializeRoutes(api.Group("/auth"))

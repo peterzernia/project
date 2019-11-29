@@ -6,12 +6,12 @@ import {
   RESET,
 } from './actions'
 
-interface Action {
+type Action = {
   type: string;
   payload?: object;
 }
 
-interface State {
+type State = {
   user: object;
   authenticated: boolean;
   notification: object;

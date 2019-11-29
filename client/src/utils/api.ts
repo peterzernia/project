@@ -1,11 +1,11 @@
 import ky from 'ky'
 
-interface Login {
+type Login = {
   username: string;
   password: string;
 }
 
-interface Register {
+type Register = {
   username: string;
   email: string;
   password1: string;
@@ -13,6 +13,16 @@ interface Register {
 }
 
 const api = ky.create({ prefixUrl: `${process.env.REACT_APP_API_URL}/api/v1/` })
+const withAuth = (token: string): any => api.extend({
+  hooks: {
+    beforeRequest: [
+      (request): void => {
+        request.headers.set('Authorization', token)
+      },
+    ],
+  },
+})
 
 export const login = (credentials: Login): Promise<{}> => api.post('auth/login', { json: credentials }).json()
+export const logout = (token: string): Promise<{}> => withAuth(token).post('auth/logout').json()
 export const register = (credentials: Register): Promise<{}> => api.post('auth/register', { json: credentials }).json()

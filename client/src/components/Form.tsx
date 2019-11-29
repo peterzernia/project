@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 type Props = {
-    children: Array<React.ReactElement>;
+    children: React.ReactElement[];
     handleSubmit: (values: object) => void;
 }
 

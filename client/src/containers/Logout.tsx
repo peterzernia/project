@@ -1,15 +1,29 @@
 import * as React from 'react'
+import { logout } from '../utils/api'
 import { CLEAR_USER } from '../actions'
-import { DispatchContext } from '../context'
+import { DispatchContext, StateContext } from '../context'
 
 export default function Logout(): React.ReactElement {
   const dispatch = React.useContext(DispatchContext)
+  const state = React.useContext(StateContext)
 
   React.useEffect(() => {
+    const authLogout = async (): Promise<void> => {
+      try {
+        await logout(state.user.token)
+      } catch (err) {
+        // Ignore err
+      }
+    }
+
+    if (state.authenticated) {
+      authLogout()
+    }
+
     dispatch({
       type: CLEAR_USER,
     })
-  }, [dispatch])
+  }, [dispatch, state.authenticated, state.user.token])
 
   return (
     <div>Logout success</div>
