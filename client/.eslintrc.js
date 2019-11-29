@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   env: {
     browser: true,
@@ -35,7 +37,8 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: [".js", ".ts", ".tsx"]
+        extensions: [".js", ".ts", ".tsx"],
+        paths: [path.resolve(__dirname, 'src')],
       }
     }
   },

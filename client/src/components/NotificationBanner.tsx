@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { DispatchContext } from '../context'
-import { CLEAR_NOTIFICATION } from '../actions'
+import { DispatchContext } from 'utils/context'
+import { CLEAR_NOTIFICATION } from 'utils/actions'
 
 type Props = {
   notification: {

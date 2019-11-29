@@ -4,7 +4,7 @@ import {
   SET_NOTIFICATION,
   CLEAR_NOTIFICATION,
   RESET,
-} from './actions'
+} from 'utils/actions'
 
 type Action = {
   type: string;

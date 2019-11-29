@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StateContext } from '../context'
+import { StateContext } from 'utils/context'
 
 export default function Home(): React.ReactElement {
   const state = React.useContext(StateContext)

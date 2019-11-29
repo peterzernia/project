@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Redirect, RouteComponentProps } from 'react-router-dom'
-import { login } from '../utils/api'
-import Form from '../components/Form'
-import Input from '../components/Input'
-import { SET_USER, SET_NOTIFICATION } from '../actions'
-import { StateContext, DispatchContext } from '../context'
+import Form from 'components/Form'
+import Input from 'components/Input'
+import { SET_USER, SET_NOTIFICATION } from 'utils/actions'
+import { StateContext, DispatchContext } from 'utils/context'
+import { login } from 'utils/api'
 
 type Payload = {
   username: string;

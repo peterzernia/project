@@ -1,9 +1,9 @@
 import * as React from 'react'
-import Form from '../components/Form'
-import Input from '../components/Input'
-import { updateUser } from '../utils/api'
-import { SET_USER, SET_NOTIFICATION } from '../actions'
-import { DispatchContext, StateContext } from '../context'
+import Form from 'components/Form'
+import Input from 'components/Input'
+import { updateUser } from 'utils/api'
+import { SET_USER, SET_NOTIFICATION } from 'utils/actions'
+import { DispatchContext, StateContext } from 'utils/context'
 
 type Payload = {
   username: string;
