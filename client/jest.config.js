@@ -9,4 +9,8 @@ module.exports = {
     '\\.css$': 'identity-obj-proxy',
     '^ky$': require.resolve('ky').replace('index.js', 'umd.js'),
   },
+  moduleDirectories: [
+    'node_modules',
+    'src',
+  ],
 }
