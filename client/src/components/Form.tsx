@@ -2,15 +2,20 @@ import * as React from 'react'
 
 type Props = {
     children: React.ReactElement[];
+    initialValues?: object;
     handleSubmit: (values: object) => void;
+    secondaryButton?: {
+      label: string;
+      handleClick: () => void;
+    };
 }
 
 export default function Form(props: Props): React.ReactElement {
-  const { children } = props
+  const { children, initialValues, secondaryButton } = props
   // Create initial values object with the names of the input
   const [values, setValues] = React.useState(
     children.map((child) => child.props.name).reduce((acc, curr) => {
-      acc[curr] = ''
+      acc[curr] = initialValues ? initialValues[curr] : ''
       return acc
     }, {}),
   )
@@ -43,6 +48,17 @@ export default function Form(props: Props): React.ReactElement {
       <button type="submit" onClick={handleSubmit}>
         Submit
       </button>
+      {
+        secondaryButton
+          && (
+            <button
+              type="button"
+              onClick={secondaryButton.handleClick}
+            >
+              {secondaryButton.label}
+            </button>
+          )
+      }
     </form>
   )
 }

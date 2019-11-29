@@ -4,7 +4,7 @@ import { CLEAR_NOTIFICATION } from '../actions'
 
 type Notification = {
   message?: string;
-  type?: string;
+  type?: 'error' | 'success';
 }
 
 type Props = {

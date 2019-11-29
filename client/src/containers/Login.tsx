@@ -16,6 +16,7 @@ export default function Login(props: RouteComponentProps): React.ReactElement {
   const { location } = history
   const state = React.useContext(StateContext)
   const dispatch = React.useContext(DispatchContext)
+  const secondaryButton = { label: 'Register', handleClick: (): void => history.push('/register') }
 
   const handleSubmit = async (payload: Payload): Promise<void> => {
     try {
@@ -45,7 +46,10 @@ export default function Login(props: RouteComponentProps): React.ReactElement {
   if (state.authenticated) return <Redirect to="/" />
 
   return (
-    <Form handleSubmit={handleSubmit}>
+    <Form
+      handleSubmit={handleSubmit}
+      secondaryButton={secondaryButton}
+    >
       <Input
         label="Username"
         name="username"

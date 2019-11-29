@@ -3,3 +3,9 @@
   color: white;
   width: 100%;
 }
+
+.success {
+  background-color: green;
+  color: white;
+  width: 100%;
+}
