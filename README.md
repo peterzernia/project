@@ -25,7 +25,7 @@ Setup your project on [Travis-CI](https://travis-ci.org/) and push changes to se
 
 ## Deployment
 
-Setup a Heroku project with a Golang and Nodejs buildpack. Change all references of `project` and `project-boilerplate` in the code to reference your own Heroku project. More info [here](https://devcenter.heroku.com/categories/deployment).
+Setup a Heroku project with a Golang and Nodejs buildpack. Change all references of `project` and `project-boilerplate` in the code to reference your own Heroku project. Make sure a heroku/nodejs buildpack is added along with the Golang buildpack. More info [here](https://devcenter.heroku.com/categories/deployment).
 
 ## Built with
 
