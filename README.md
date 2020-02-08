@@ -1,5 +1,7 @@
 # Project
 
+[![Build Status](https://travis-ci.com/peterzernia/project.svg?branch=master)](https://travis-ci.com/peterzernia/project)
+
 Project is a boilerplate web application project built with Go & Typescript. Skip through the initial setup of a project while keeping the dependencies as minimal as possible. Project's configuration is completely exposed, allowing you to change at will. Project provides a user model and auth api endpoints on the backend as well as authentication routes on the frontend.
 
 Project ships with configuration for Docker, Travis-CI for continuous integration and Heroku for deployment.
